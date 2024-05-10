@@ -1,4 +1,3 @@
-# Importing necessary functions from setuptools module
 from setuptools import find_packages, setup
 from typing import List
 
