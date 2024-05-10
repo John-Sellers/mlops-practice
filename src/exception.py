@@ -1,4 +1,3 @@
-# Import the sys module to access system-specific parameters and functions
 import sys
 
 # Define a function named error_message_detail that takes two parameters: error and error_detail
@@ -24,7 +23,7 @@ class CustomException(Exception):
 
         # Call the initialization method of the parent class (Exception) using super()
         super().__init__(error_message)
-        
+
         # Assign the error message returned by error_message_detail() to self.error_message
         self.error_message = error_message_detail(error_message, error_detail=error_detail)
 
