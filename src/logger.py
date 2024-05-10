@@ -31,6 +31,3 @@ logging.basicConfig(
     # Setting the logging level to INFO (only INFO and higher-level messages will be logged)
     level=logging.INFO
 )
-
-if __name__ == '__main__':
-    logging.info('Logging has started')
