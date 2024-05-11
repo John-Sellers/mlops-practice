@@ -6,8 +6,11 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
 # Import custom exception and logger
+from src.components import data_transformation
 from src.exception import CustomException
 from src.logger import logging
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
 
 # Define a data class for data ingestion configuration
 @dataclass
@@ -24,7 +27,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         try:
             # Load data from CSV file into a DataFrame
-            df = pd.read_csv(r'C:\User\selle\Downloads\code_dev\mlops-practice\notebook\data\StudentsPerformance.csv')
+            df = pd.read_csv(r'C:\Users\selle\Downloads\code_dev\mlops-practice\notebook\data\StudentsPerformance.csv')
             
             # Log information about starting data ingestion
             logging.info('Data ingestion has commenced')
@@ -55,3 +58,13 @@ class DataIngestion:
             # Log an error message and raise a custom exception
             logging.info('An error has occurred!')
             raise CustomException(e, sys)
+
+if __name__ == '__main__':
+    
+    obj = DataIngestion()
+
+    train_data, test_data = obj.initiate_data_ingestion()
+    
+    data_transformation = DataTransformation()
+
+    data_transformation.initiate_data_transformation(train_data, test_data)
