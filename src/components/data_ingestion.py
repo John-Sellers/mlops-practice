@@ -1,6 +1,13 @@
 import os
 import sys
 
+# Get the current directory of the script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Add the 'src' directory to the Python path
+src_dir = os.path.join(current_dir, "src")
+sys.path.append(src_dir)
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
@@ -8,8 +15,8 @@ from dataclasses import dataclass
 # Import custom exception and logger
 from src.exception import CustomException
 from src.logger import logging
-from data_transformation import DataTransformation
-from model_training import ModelTrainer
+from src.components.data_transformation import DataTransformation
+from src.components.model_training import ModelTrainer
 
 
 # Define a data class for data ingestion configuration
@@ -73,6 +80,7 @@ class DataIngestion:
 
 
 if __name__ == "__main__":
+
     obj = DataIngestion()
 
     train_data, test_data = obj.initiate_data_ingestion()
