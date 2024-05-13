@@ -1,13 +1,6 @@
 import os
 import sys
 
-# Get the current directory of the script
-current_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Add the 'src' directory to the Python path
-src_dir = os.path.join(current_dir, "src")
-sys.path.append(src_dir)
-
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
