@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
 # Import custom exception and logger
+sys.path.append(".")
 from src.exception import CustomException
 from src.logger import logging
 from src.components.data_transformation import DataTransformation
