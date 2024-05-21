@@ -1,0 +1,22 @@
+FROM python:3.10.0
+
+WORKDIR /src
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+RUN pip install sagemaker
+
+
+COPY /inference_pipeline/artifacts/. /src/artifacts/
+COPY /inference_pipeline/components/. /src/components/
+
+COPY /inference_pipeline/inference.py .
+COPY /exception.py .
+COPY /logger.py .
+COPY /utils.py .
+COPY /__init__.py .
+
+ENV SAGEMAKER_PROGRAM inference.py
+
+ENTRYPOINT [ "python3", "-m", "inference.py" ]
