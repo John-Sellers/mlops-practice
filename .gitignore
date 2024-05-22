@@ -162,5 +162,7 @@ cython_debug/
 *.csv
 *.tsv
 *.pkl
+*.tar.gz
 
 catboost_info/
+
