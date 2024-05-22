@@ -9,8 +9,8 @@ from dataclasses import dataclass
 sys.path.append(".")
 from src.exception import CustomException
 from src.logger import logging
-from src.components.data_transformation import DataTransformation
-from src.components.model_training import ModelTrainer
+from src.inference_pipeline.components.data_transformation import DataTransformation
+from src.inference_pipeline.components.model_training import ModelTrainer
 
 
 # Define a data class for data ingestion configuration
@@ -29,9 +29,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         try:
             # Load data from CSV file into a DataFrame
-            df = pd.read_csv(
-                r"C:\Users\selle\Downloads\code_dev\mlops-practice\notebook\data\StudentsPerformance.csv"
-            )
+            df = pd.read_csv("/Users/johnsellers/Downloads/stud.csv")
 
             # Log information about starting data ingestion
             logging.info("Data ingestion has commenced")

@@ -7,7 +7,6 @@ from src.exception import CustomException
 from src.logger import logging
 from src.utils import load_object
 
-
 class PredictPipeline:
     def __init__(self, model, preprocessor):
         self.model = model
@@ -21,18 +20,8 @@ class PredictPipeline:
         except Exception as e:
             raise CustomException(e, sys)
 
-
 class CustomData:
-    def __init__(
-        self,
-        gender: str,
-        race_ethnicity: str,
-        parental_level_of_education: str,
-        lunch: str,
-        test_preparation_course: str,
-        reading_score: int,
-        writing_score: int,
-    ):
+    def __init__(self, gender, race_ethnicity, parental_level_of_education, lunch, test_preparation_course, reading_score, writing_score):
         self.gender = gender
         self.race_ethnicity = race_ethnicity
         self.parental_level_of_education = parental_level_of_education
@@ -56,7 +45,6 @@ class CustomData:
         except Exception as e:
             raise CustomException(e, sys)
 
-
 def model_fn(model_dir):
     model_path = os.path.join(model_dir, "model.pkl")
     preprocessor_path = os.path.join(model_dir, "preprocessor.pkl")
@@ -64,9 +52,21 @@ def model_fn(model_dir):
     preprocessor = load_object(file_path=preprocessor_path)
     return model, preprocessor
 
+def input_fn(input_data, content_type):
+    if content_type == 'application/json':
+        data = pd.read_json(input_data, orient='records')
+        return data
+    else:
+        raise ValueError(f"Unsupported content type: {content_type}")
 
 def predict_fn(input_data, model):
     model, preprocessor = model
     pipeline = PredictPipeline(model, preprocessor)
     prediction = pipeline.predict(input_data)
     return prediction
+
+def output_fn(prediction, accept):
+    if accept == 'application/json':
+        return prediction.tolist(), 'application/json'
+    else:
+        raise ValueError(f"Unsupported accept type: {accept}")
